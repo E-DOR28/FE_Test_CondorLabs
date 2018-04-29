@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Front-end Test</title>
+	<script type="text/javascript" src="main.js"></script>
+	<link rel="stylesheet" type="text/css" href="main.css">
+
+</head>
+<body>
+
+	<div class="filterBox">
+	
+		<div class="grid-item dateFilters" id="dateFilters">
+			<label>
+				<input type="checkbox" name="dtRange" id="dtRange" value="setDtRange" onchange="handleClick(this,'endDate')">
+				Filter by date range
+			</label>
+
+			<label>Start Log Date&nbsp;&nbsp;&nbsp;
+				<input type="date" name="startDate" id="startDate">
+			</label>
+
+			<label>Start Log Date 2
+				<input type="date" name="endDate" id="endDate" disabled="true">
+			</label>
+		</div>
+
+		<div class="grid-item">
+			<label id="endDate">
+				<input type="checkbox" name="stState" id="stState" value="setState" onchange="handleClick(this,'cd_state')">
+				Filter by State&nbsp;&nbsp;
+				<select name="cd_state" id="cd_state" disabled="true">
+					<option value="none">Show All</option>
+					<option value="FL">FL</option>
+					<option value="OH">OH</option>
+					<option value="GA">GA</option>
+					<option value="LA">LA</option>
+				</select>
+			</label>
+
+			<label name="dtRange">Order by
+				<select name="logData" id="logData">
+					<option value="dt_Start_Log">Start Log Date</option>
+					<option value="dt_end_log">End Log Date</option>
+					<option value="cd_cebroker_state">State Code</option>
+					<option value="pro_cde">Pro Code</option>
+					<option value="cd_profession">Profession</option>
+					<option value="id_license">License ID</option>
+					<option value="dt_end">Cycle End Date</option>
+					<option value="ds_compl_status_returned">Compliance Status</option>
+					<option value="id_client_nbr">Client ID</option>
+					<option value="cd_enviroment">Enviroment</option>
+					<option value="cd_machine">Machine</option>
+				</select>
+			</label>
+		</div>
+
+		<div class="btnBox grid-item">
+			<button class="displayBtn" onclick="displayRecords();">
+				Display List
+			</button>
+		</div>
+
+	</div><br>
+
+	<div class="listBox">	
+		<center>
+			<div class="PagesControl" id="PagesControl"></div>
+		</center><br>
+
+		<div class="row row-title">
+		  	<div class="col-5">State Code</div>
+			<div class="col-5">Pro Code</div>
+			<div class="col-5">Profession</div>
+			<div class="col-5">License ID</div>
+			<div class="col-10">Cycle End Date</div>
+			<div class="col-10">Compliance Status</div>
+			<div class="col-5">Client ID</div>
+			<div class="col-20">Start Log Date</div>
+			<div class="col-20">End Log Date</div>
+			<div class="col-10">Enviroment</div>
+			<div class="col-5">Machine</div>
+		</div>
+
+		<div class="row" id="listItems">
+			<div class="items">
+
+			</div>
+
+		</div>
+	</div>
+
+
+<script type="text/javascript">
+	//Setting start log date 
+	var todayDate  = new Date().getFullYear()+"-"+("0"+(new Date().getMonth()+1)).slice(-2)+"-"+("0"+(new Date().getDate())).slice(-2);
+	document.getElementById("startDate").value = todayDate;
+	document.getElementById("endDate").value = todayDate;
+</script>
+</body>
+</html>
