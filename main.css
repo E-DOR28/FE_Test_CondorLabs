@@ -11,6 +11,16 @@ body {
   	grid-template-columns: auto auto auto;
 }
 
+.filterBox .btnBox .displayBtn {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 4px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
 .grid-item {
 	text-align: center;
 }
@@ -22,6 +32,19 @@ body {
 	padding: 10px;
 	margin: auto;
 	position: relative;
+}
+
+.listBox .GoBackBtn {
+    background-color: #7F7FFF;
+    border: none;
+    padding: 4px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;	
+}
+
+.PagesControl {
+	height: 20px;
 }
 
 .row {
@@ -61,4 +84,3 @@ body {
 .col-5 {
 	width: 70px;
 }
-
