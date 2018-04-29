@@ -8,14 +8,11 @@ xhttp.onreadystatechange = function() {
 		displayRecords();
 	}
 };
-//xhttp.open("GET", "recordsPrueba.json", true);
 xhttp.open("GET", "https://api.cebroker.com/v1/cerenewaltransactions/GetLogsRecordData", true);
-
-
 xhttp.send(null);
 
 
-
+//This object will manage the data get from the http call
 function manageInfo() {
 	this.data = {};
 	this.sortedArray = [];
@@ -27,6 +24,7 @@ function manageInfo() {
 	this.avergateTimePerDayArray = [];
 	this.dataForChar = [];
 
+	// this method get the data from this.data property, and will filter by date the data on the list
 	this.filterByDate = function (start, end) {
 		var startDate_init = new Date(start+"T00:00:00.00");
 		var startDate_end  = end !== undefined ? new Date(end+"T23:59:59.99") : new Date(start+"T23:59:59.99");
@@ -37,6 +35,7 @@ function manageInfo() {
 			}
 	};
 
+	// this method get the data filteredbydatearray property, and will filter it by state
 	this.filterByState = function (st_cd) {
 		if (st_cd !== "none" && st_cd !== undefined) {
 			for (var i in this.filteredByDateArray) {
@@ -49,6 +48,7 @@ function manageInfo() {
 		}
 	};
 
+	//this method will take the data filtered by date and state, and will order it using the field selected by the user
 	this.sortByValue  = function (field){
 		for(var i in this.filteredByStateArray) {
 			// Push each JSON Object entry in array by [value, key]
@@ -57,6 +57,7 @@ function manageInfo() {
 		this.sortedArray.sort();
 	};
 
+	//this method will calculed the numb of request (per compilance or machine) received, by data range selected
 	this.NumRequestPerField = function () {
 		var RequestPerCompilance = [];
 		var RequestPerMachine = [];
@@ -77,6 +78,7 @@ function manageInfo() {
 	};
 
 
+	//this method will calculed the total response time and response time per day, by data range selected
 	this.CalculateResponseTime = function () {
 		var responseTime = 0;
 		var responseTimeArray = [];
@@ -116,7 +118,7 @@ function manageInfo() {
 		
 	};
 
-
+	// THis method will display the list after all filters and sorts made
 	this.displayList = function (fisrtRecord) {
 		var items = "";
 		var pagesCtrl = "";
@@ -176,6 +178,7 @@ function manageInfo() {
 
 }
 
+//This function is used to move between pages displayed
 function moveOnPages(fisrtRecord) {
 	var displayedRecords = {};
 
@@ -184,6 +187,7 @@ function moveOnPages(fisrtRecord) {
 	document.getElementById("PagesControl").innerHTML = displayedRecords.ctrls;
 }
 
+//This function will call all the method need to display the list with the user indications
 function displayRecords() {
 		jsListObj.filteredByDateArray = [];
 		jsListObj.filteredByStateArray = [];
@@ -206,7 +210,6 @@ function displayRecords() {
 
 		jsListObj.NumRequestPerField();
 		jsListObj.CalculateResponseTime();
-
 }
 
 // This are the events that give the functionality to the interface objetcs
