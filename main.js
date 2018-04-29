@@ -1,3 +1,4 @@
+// This object will manage the data from the service call
 var jsListObj = new manageInfo();
 
 //Here is the request I made to the service
@@ -12,7 +13,7 @@ xhttp.open("GET", "https://api.cebroker.com/v1/cerenewaltransactions/GetLogsReco
 xhttp.send(null);
 
 
-//This object will manage the data get from the http call
+//This class will manage the data get from the http call
 function manageInfo() {
 	this.data = {};
 	this.sortedArray = [];
