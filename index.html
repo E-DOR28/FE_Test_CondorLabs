@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Condor Labs Front-End Test</title>
+	<script type="text/javascript" src="script.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+	<div class="container">
+		
+		<div class="title">
+			<h2>Compilance Status for Licensees Database Control</h2>
+		</div>
+
+		<div class="CtrlBox">
+		
+				<div class="wrapper">
+					<div class="filterByDate">
+
+						<label> Filter by <b>START LOG DATE</b> range
+						  <input type="checkbox" name="dtRange" id="dtRange" value="setDtRange" onchange="handleClick(this,'endDate')">
+						</label>
+
+						<label><span>First Date</span>
+							<input type="date" name="startDate" id="startDate">
+						</label>
+
+						<label><span>Last Date</span>
+							<input type="date" name="endDate" id="endDate" disabled="true">
+						</label>
+
+					</div>
+
+					<div class="filterByState">
+						
+						<label id="endDate">Filter by <b>STATE</b>
+							<input type="checkbox" name="stState" id="stState" value="setState" onchange="handleClick(this,'cd_state')">
+						</label>
+
+						<label id="endDate"><span>Select State</span>
+							<select name="cd_state" id="cd_state" disabled="true">
+								<option value="none">Show All</option>
+								<option value="FL">FL</option>
+								<option value="OH">OH</option>
+								<option value="GA">GA</option>
+								<option value="LA">LA</option>
+							</select>
+						</label>
+
+					</div>
+
+					<div class="OrderByState">
+
+						<label>Order by <b>STATE</b></label>
+
+						<label name="dtRange"><span>Select State</span>
+							<select name="logData" id="logData">
+								<option value="dt_Start_Log">Start Log Date</option>
+								<option value="dt_end_log">End Log Date</option>
+								<option value="cd_cebroker_state">State Code</option>
+								<option value="pro_cde">Pro Code</option>
+								<option value="cd_profession">Profession</option>
+								<option value="id_license">License ID</option>
+								<option value="dt_end">Cycle End Date</option>
+								<option value="ds_compl_status_returned">Compliance Status</option>
+								<option value="id_client_nbr">Client ID</option>
+								<option value="cd_enviroment">Enviroment</option>
+								<option value="cd_machine">Machine</option>
+							</select>
+						</label>
+
+					</div>
+
+
+				<div class="responseTimeBox">
+				
+						<label><span><b>Total Average Response time: </b></span>
+							<span id="responseTime"></span>
+						</label>
+
+				</div>
+
+				<div class="displayBox">
+				
+						<label>
+							<button class="displayBtn" onclick="displayRecords();">
+								<b>Display List</b>
+							</button>
+						</label>
+
+				</div>
+
+				</div>
+
+		</div>
+
+		<hr>
+		<div class="statusBar">
+			<label>
+				<button class="viewGraph" onclick="toggle()">
+					<b>View Graphics</b>
+				</button>
+			</label>
+		</div><br>
+
+
+		<div class="StatsBox" id="StatsBox" style="display: none;">
+
+			<div class="canvas_one">
+				<label><span>Average Response Time Per Day</span></label>
+				<canvas id="canvas_one" width="420px" height="200px"></canvas>
+			</div>
+			<div class="canvas_two">
+				<label><span>Total Requests Per Machine</span></label>
+				<canvas id="canvas_two" width="420px" height="200px"></canvas>
+			</div>
+			<div class="canvas_three">
+				<label><span>Total Requests Per Compliance Status</span></label>
+				<canvas id="canvas_three" width="420px" height="200px"></canvas>
+			</div>
+			
+		</div>
+		
+		<div class="statusBar">
+			<div class="PagesControl" id="PagesControl">
+				Loading Records...
+			</div>
+		</div>
+
+		<div class="listBox">
+			
+			<div class="row row-title">
+			  	<div class="col-5">State Code</div>
+				<div class="col-5">Pro Code</div>
+				<div class="col-5">Profession</div>
+				<div class="col-5">License ID</div>
+				<div class="col-10">Cycle End Date</div>
+				<div class="col-10">Compliance Status</div>
+				<div class="col-5">Client ID</div>
+				<div class="col-20">Start Log Date</div>
+				<div class="col-20">End Log Date</div>
+				<div class="col-10">Enviroment</div>
+				<div class="col-5">Machine</div>
+			</div>
+
+			<div class="row" id="listItems">
+
+			</div>
+
+		</div><br>
+
+	</div>
+
+</body>
+<script type="text/javascript">
+
+	function toggle(){
+		var statsBox = document.getElementById("StatsBox");
+		statsBox.style.display = statsBox.style.display === "none" ? "inline-grid" : "none";
+	}
+
+	//Setting start log date 
+	var todayDate  = new Date().getFullYear()+"-"+("0"+(new Date().getMonth()+1)).slice(-2)+"-"+("0"+(new Date().getDate())).slice(-2);
+	document.getElementById("startDate").value = todayDate;
+	document.getElementById("endDate").value = todayDate;
+</script>
+</html>
